@@ -1,0 +1,26 @@
+# secrets and local state
+.env
+.env.*
+!.env.example
+.keys/
+.data/
+*.key
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+# node
+node_modules/
+.next/
+out/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts
+# os
+.DS_Store
+# media
+*.wav
+*.mp4
+*.mov
+omega/plugins/ahadi/ahadi.json

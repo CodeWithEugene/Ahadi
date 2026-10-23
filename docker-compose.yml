@@ -1,0 +1,45 @@
+# Ahadi: the bridge and the Omega agent. The web app runs separately (Vercel or `make web`).
+#   cp .env.example .env   # add an LLM key
+#   make setup             # testnet accounts (writes .keys/, git-ignored)
+#   docker compose up -d --build
+services:
+  bridge:
+    build: { context: ., dockerfile: bridge/Dockerfile }
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      AHADI_KEYS_FILE: /app/.keys/testnet.json
+      AHADI_DB: /app/.data/ahadi.db
+      OMEGA_MEMORY_DIR: /omega-memory
+    volumes:
+      - ./.keys:/app/.keys:ro
+      - ./.data:/app/.data
+      - ./.data/omega-memory:/omega-memory:ro
+    ports: ["8000:8000"]
+    restart: unless-stopped
+
+  omega:
+    build: { context: ./omega }
+    image: ahadi-omega:dev
+    depends_on: [bridge]
+    tty: true          # without a TTY Omega's internal nginx exits at start
+    init: true
+    security_opt: ["no-new-privileges:true"]
+    tmpfs: ["/tmp:size=64m,mode=1777", "/var/tmp:size=64m,mode=1777", "/run:size=16m,mode=755"]
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ASIONE_API_KEY: ${ASIONE_API_KEY:-}
+      ASI_API_KEY: ${ASI_API_KEY:-}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+    volumes:
+      - ./.data/omega-memory:/PeTTa/repos/Omega/memory
+      - ./omega/plugins/ahadi:/PeTTa/repos/Omega/plugins/ahadi:ro
+    command:
+      - commchannel=websocket
+      - WS_URL=ws://bridge:8000/omega
+      - WS_TOKEN=${WS_TOKEN:-}
+      - provider=${OMEGA_PROVIDER:-OpenRouter}
+      - model=${OMEGA_MODEL:-moonshotai/kimi-k3}
+      - securityPolicyPath=/PeTTa/repos/Omega/profile/policy.yaml
+    restart: unless-stopped

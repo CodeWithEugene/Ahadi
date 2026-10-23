@@ -1,0 +1,60 @@
+{
+  "request": {
+    "dry": true,
+    "swapType": "EXACT_INPUT",
+    "slippageTolerance": 100,
+    "originAsset": "nep245:v2_1.omni.hot.tg:1100_111bzQBB65GxAPAVoxqmMcgYo5oS3txhqs1Uh1cgahKQUeTUq1TJu",
+    "depositType": "ORIGIN_CHAIN",
+    "depositMode": "MEMO",
+    "destinationAsset": "nep141:sol-5ce3bf3a31af18be40ba30f721101b4341690186.omft.near",
+    "amount": "952000000",
+    "recipient": "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM",
+    "recipientType": "DESTINATION_CHAIN",
+    "refundTo": "GA2226DVH7XAGTRL7LELZ35V5QEAJDVQZLZOEKEIMXBGHB3CB5FCYYPH",
+    "refundType": "ORIGIN_CHAIN",
+    "deadline": "2026-10-23T10:25:44.527988Z"
+  },
+  "status": 201,
+  "response": {
+    "quote": {
+      "amountIn": "952000000",
+      "amountInFormatted": "95.2",
+      "amountInUsd": "95.158588000000",
+      "minAmountIn": "952000000",
+      "amountOut": "95170766",
+      "amountOutFormatted": "95.170766",
+      "amountOutUsd": "95.129366716790",
+      "minAmountOut": "94219058",
+      "timeEstimate": 22,
+      "refundFee": "180971",
+      "withdrawFee": "10005"
+    },
+    "quoteRequest": {
+      "dry": true,
+      "depositMode": "MEMO",
+      "swapType": "EXACT_INPUT",
+      "slippageTolerance": 100,
+      "originAsset": "nep245:v2_1.omni.hot.tg:1100_111bzQBB65GxAPAVoxqmMcgYo5oS3txhqs1Uh1cgahKQUeTUq1TJu",
+      "depositType": "ORIGIN_CHAIN",
+      "destinationAsset": "nep141:sol-5ce3bf3a31af18be40ba30f721101b4341690186.omft.near",
+      "amount": "952000000",
+      "refundTo": "GA2226DVH7XAGTRL7LELZ35V5QEAJDVQZLZOEKEIMXBGHB3CB5FCYYPH",
+      "refundType": "ORIGIN_CHAIN",
+      "recipient": "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM",
+      "recipientType": "DESTINATION_CHAIN",
+      "deadline": "2026-10-23T10:25:44.527Z",
+      "confidentiality": "public",
+      "quoteWaitingTimeMs": 0,
+      "insured": false,
+      "appFees": [
+        {
+          "recipient": "5880ad2b362620fadf759cbceb1cd5737ce8c6ed7fb8e9942881e6731f9247dd",
+          "fee": 1
+        }
+      ]
+    },
+    "signature": "ed25519:BBFvT9esZYC4suHsT7bvxdjpVQJXcNL7N65Xd2vBvNNpouSJNwCZ8YjPdiXNcqWz2Jy6WYUvsR3ReYw1Myp2yh8",
+    "timestamp": "2026-10-23T10:15:44.824Z",
+    "correlationId": "e53baa98-fc6f-466f-bda2-dcc76734b39f"
+  }
+}

@@ -1,0 +1,243 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-display);
+  --font-display: var(--font-display);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Ahadi */
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-hair: var(--hair);
+  --color-note: var(--note);
+  --color-note-soft: var(--note-soft);
+  --color-note-ink: var(--note-ink);
+  --color-agent: var(--agent);
+  --color-agent-soft: var(--agent-soft);
+  --color-organiser: var(--organiser);
+  --color-organiser-soft: var(--organiser-soft);
+  --color-held: var(--held);
+  --color-held-soft: var(--held-soft);
+  --color-failed: var(--failed);
+  --color-failed-soft: var(--failed-soft);
+  --color-rejected: var(--rejected);
+  --color-rejected-soft: var(--rejected-soft);
+  --color-carried: var(--carried);
+  --color-carried-soft: var(--carried-soft);
+  --color-quiet: var(--quiet);
+  --color-quiet-soft: var(--quiet-soft);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --shadow-xs: 0 1px 2px 0 var(--shadow-color-1);
+  --shadow-sm: 0 2px 5px -1px var(--shadow-color-1), 0 1px 3px -1px var(--shadow-color-2);
+  --shadow-md: 0 6px 14px -4px var(--shadow-color-1), 0 3px 7px -3px var(--shadow-color-2);
+  --shadow-lg: 0 18px 36px -12px var(--shadow-color-1), 0 8px 16px -8px var(--shadow-color-2);
+  --shadow-xl: 0 34px 64px -18px var(--shadow-color-1), 0 18px 36px -18px var(--shadow-color-2);
+
+  --ease-ahadi: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  --paper: #f6f7f4;
+  --paper-2: #eceee9;
+  --ink: #18211e;
+  --ink-2: #4a5550;
+  --hair: #d9ded8;
+
+  /* banknote green: the fund, settled money */
+  --note: #0b5d4b;
+  --note-soft: #e3efe9;
+  --note-ink: #08463a;
+  /* the two keys */
+  --agent: #3f3ab5;
+  --agent-soft: #e8e8f7;
+  --organiser: #a3611a;
+  --organiser-soft: #f6ecdf;
+  /* outcomes */
+  --held: #6b4fc6;
+  --held-soft: #efeafb;
+  --failed: #c2410c;
+  --failed-soft: #fbeae2;
+  --rejected: #9f1239;
+  --rejected-soft: #f9e5ea;
+  --carried: #0e7490;
+  --carried-soft: #e2f1f5;
+  --quiet: #687571;
+  --quiet-soft: #eef0ed;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: #ffffff;
+  --card-foreground: var(--ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--ink);
+  --primary: var(--note);
+  --primary-foreground: #ffffff;
+  --secondary: #ffffff;
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-2);
+  --muted-foreground: #5c6863;
+  --accent: var(--paper-2);
+  --accent-foreground: var(--ink);
+  --destructive: var(--failed);
+  --border: var(--hair);
+  --input: #cbd2cc;
+  --ring: var(--note);
+
+  --chart-1: var(--note);
+  --chart-2: var(--held);
+  --chart-3: var(--carried);
+  --chart-4: var(--organiser);
+  --chart-5: var(--quiet);
+
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--note);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--paper-2);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--hair);
+  --sidebar-ring: var(--note);
+
+  --shadow-color-1: rgb(24 33 30 / 0.07);
+  --shadow-color-2: rgb(24 33 30 / 0.035);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply bg-background;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--note) 22%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--note);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .ahadi-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 1760px;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) { .ahadi-page { padding-inline: 1.5rem; } }
+  @media (min-width: 1024px) { .ahadi-page { padding-inline: 2.5rem; } }
+  @media (min-width: 1536px) { .ahadi-page { padding-inline: 3.5rem; } }
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+  .hash {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: -0.01em;
+  }
+  .guilloche-draw path {
+    stroke-dasharray: 2400;
+    stroke-dashoffset: 2400;
+    animation: guilloche 2.6s var(--ease-ahadi) forwards;
+  }
+  @keyframes guilloche {
+    to { stroke-dashoffset: 0; }
+  }
+  .guilloche-orbit {
+    perspective: 1100px;
+    perspective-origin: 50% 40%;
+  }
+  .guilloche-orbit-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: guilloche-tilt 22s ease-in-out infinite alternate;
+  }
+  .guilloche-orbit-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateZ(var(--z));
+    animation: guilloche-spin var(--spin) linear infinite;
+    animation-direction: var(--dir);
+  }
+  @keyframes guilloche-tilt {
+    0% { transform: rotateX(58deg) rotateY(-14deg) rotateZ(0deg); }
+    50% { transform: rotateX(48deg) rotateY(8deg) rotateZ(8deg); }
+    100% { transform: rotateX(62deg) rotateY(14deg) rotateZ(-6deg); }
+  }
+  @keyframes guilloche-spin {
+    from { transform: translateZ(var(--z)) rotate(0deg); }
+    to { transform: translateZ(var(--z)) rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .guilloche-orbit-stage, .guilloche-orbit-ring { animation: none; }
+    .guilloche-orbit-stage { transform: rotateX(55deg); }
+    .guilloche-draw path { animation: none; stroke-dashoffset: 0; }
+    html { scroll-behavior: auto; }
+  }
+}
