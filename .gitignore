@@ -24,3 +24,7 @@ next-env.d.ts
 *.mp4
 *.mov
 omega/plugins/ahadi/ahadi.json
+
+# local editor and agent tooling
+.claude/
+.cursor/
