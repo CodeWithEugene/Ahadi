@@ -1,56 +1,48 @@
-# Submission: Paste-Ready Fields For BASIX.MARKET (Draft)
+# Submission: Fields For The BASIX.MARKET Entry Form
 
-> Entry form: https://www.basix.market/lms/buildathon/4/submission. **Changes save automatically**, so paste final text only. Limits are from the form's HTML (see [info.md](info.md) §10.1). Numbers marked ⟨…⟩ are filled in from the real build and test run before submitting. Deadline **15:00 EAT, Saturday 24 October**; target 13:30 EAT.
+> Entry form: https://www.basix.market/lms/buildathon/4/submission. Limits from the form: title 80, tagline 140, description 120 to 4,000 characters, video file upload.
 
----
-
-## Project Title (max 80)
+## Project Title
 
 Ahadi
 
-## Tagline (max 140)
+## Tagline
 
 An Omega agent that pays prize winners from a published rule, only with approval, and shows every dollar on a public Stellar ledger.
-
-*(132 characters; limit 140.)*
 
 ## Live Demo
 
 https://ahadi.codewitheugene.top
 
-## Slide Deck (optional)
+## GitHub Repository
 
-⟨link to a short deck, if made⟩
-
-## GitHub Repository (pre-filled)
-
-https://github.com/CodeWithEugene/AI-OMEGA-AGENT-DEV-BUILDATHON (**make public before submitting**). Also pushed to `BASIXmarket-io/omniversity-b4-technetians`.
+https://github.com/CodeWithEugene/Ahadi
 
 ## Demo Video
 
-Upload `Ahadi-Demo.mp4` (≤ 3:00, 1080p, H.264). Start the upload by 14:00 EAT at the latest.
+`Ahadi-Demo.mp4` (2:32, 1080p, narrated in the builder's cloned voice, captioned)
 
-## Description (120 to 4,000 characters, Markdown)
+## Description
 
 **Track:** Global payouts and prize transparency · **Entry type:** New build · **Team:** Technetians (Eugene Mutembei, solo, Nairobi)
 
-**The problem.** Prize funds are usually a spreadsheet and a promise. BASIX's first fund was USD 1,700 for 50 teams; fewer than half qualified, six teams earned prizes and USD 1,000 rolled forward. The headline was public; the rule behind it, each payout, its fees and its receipt were not provable by participants, and cross-border payouts can fail or duplicate without a trace.
+**The problem.** Prize funds are usually a spreadsheet and a promise. BASIX's first fund was USD 1,700 sized for 50 teams; six teams won and USD 1,000 rolled forward. Participants see the headline, but not the rule behind it, each payout, its cost or its receipt, and small cross-border payouts are slow and expensive.
 
 **What Ahadi does.** Ahadi ("promise" in Kiswahili) is a SingularityNET Omega agent that coordinates a prize fund on Stellar testnet:
-1. The organiser publishes the funding rule before registration; Ahadi records its hash on the fund account.
-2. At cutoff, Ahadi derives every amount from the rule in MeTTa (20 of 50 eligible → 40% → USD 680 for six places, USD 1,020 reserved), with a visible trail.
-3. It runs pre-flight checks, proposes each payout and signs its half. The fund needs two signatures (agent + organiser), so the agent alone gets `tx_bad_auth` from Stellar ⟨and, once the vault test passes: neither can pay alone⟩.
-4. The organiser approves; payouts settle in seconds; every ledger line links to its testnet receipt, and its memo is the request's hash.
-5. Failures and duplicates are handled: an unactivated wallet's prize is held as a 30-day claimable balance; a repeated request gets the original receipt (ledger check plus Ahadi's memory); an injected "ignore the rule" message is refused.
-6. A winner who wants another chain gets a NEAR Intents dry quote (simulated, as the track requires).
-7. The reserve moves to the next event's fund with a receipt, and in a fresh session Ahadi remembers where every dollar went. The public ledger balances: received = paid + held + carried.
+1. The funding rule is published before registration; its SHA-256 hash is recorded on the fund account, and anyone can recompute it in the browser.
+2. At cutoff Ahadi derives every amount in MeTTa (20 of 50 eligible → 40% → USD 680 across six places, USD 1,020 reserved).
+3. Each payout needs two signatures. Every fund is a 2-of-2 vault (fund key disabled; Ahadi and the organiser weight 1, thresholds 2). Ahadi signs only what its MeTTa rules allow; alone, Stellar refuses it (tx_bad_auth). The organiser signs in the browser; the key never leaves it.
+4. Every ledger line links to its testnet receipt; the memo is the request's fingerprint.
+5. Failures and duplicates are handled: a wallet that was never activated gets its prize held as a 30-day claimable balance; "please pay again" gets the original receipt; a message that tries to override the rule is refused on three checks and recorded.
+6. The reserve moves to the next event's fund with a receipt, and the ledger matches the chain to the cent.
+7. A winner who wants another chain gets a NEAR Intents dry quote (simulated, as the track asks).
 
-**How it works.** Omega ⟨version⟩ runs in Docker with ⟨provider/model⟩ on its websocket channel; a bridge relays the web console and Telegram into it. Custom Omega skills are its only tools (`ahadi-*`: rule, derive, check, propose, reroute, ledger, near-quote, carry-forward); the funding rule and checks are MeTTa; Omega's long-term memory stores requests, payouts, failures and events. A ledger service stores proposals and signed transactions; a Next.js site shows the public ledger, the organiser console, the agent's activity and a verify page. The LLM reads and writes language only; it never chooses an amount or a signature.
+**How Omega does the work.** Omega v0.1.20 with main source at commit 63a7826 runs in Docker on OpenRouter (Kimi K3; GLM 5.3 tested). Our Omega plugin adds ten skills (ahadi-derive, ahadi-propose, ahadi-request, ahadi-carry-forward and others) and the funding rules in MeTTa: nine named checks decide allowed or refused, the route, and the next step after a network failure. The language model only reads messages, picks skills and writes replies; it never chooses an amount or a signature. A FastAPI bridge is Omega's websocket channel (web console and Telegram relay), re-checks every MeTTa decision with a Python mirror and signs only if both agree. Omega's long-term memory recalls past requests and events.
 
-**Evidence.** ⟨N⟩ tests pass (rule maths, idempotency, failure mapping, 2-of-2 approval, injection refusal, carry-forward). All five track checklist items run on testnet; hashes in `docs/evidence.md`. Raven (Stellar's MCP server) was used for Stellar development help.
+**Evidence.** 36 fast tests; 60 decisions and 20 derivations where MeTTa (run on PeTTa in the Omega image) agrees with Python; 7 live testnet tests (each key alone refused, both settle, resent envelope pays once, unactivated wallet held). The whole flow passes end to end in the browser on the real model. Network drops are recovered by transaction hash without paying twice. Details: docs/evidence.md.
 
-**Simulated or mocked.** Stellar testnet and a demo USD asset; the NEAR Intents leg is a dry quote; all people, teams and wallets are fictional.
+**Simulated or mocked.** Stellar testnet with a demo USD asset; the NEAR leg is a dry quote; all people, teams and wallets are fictional; the console uses a demo passcode.
 
-**What's next.** Real USDC on mainnet; organiser keys in a hardware or browser wallet; 2-of-3 approvals; cash-out to M-Pesa through Stellar anchors (to confirm per country); driving the Stellar Disbursement Platform for bulk payouts; running BASIX's next event on it.
+**What's next.** Real USDC on mainnet, 2-of-3 approvals, cash-out to M-Pesa through Stellar anchors, driving the Stellar Disbursement Platform for bulk payouts, and running BASIX's next event on it.
 
-**AI disclosure.** Built with Claude Code (Anthropic, Claude Opus 5.5) and subagents for research, planning, docs and code, as the brief allows; details in `AI_DISCLOSURE.md`.
+**AI disclosure.** Built with Claude Code (Anthropic, Claude Opus 5.5) as the brief allows; narration in the builder's own cloned voice (KittenTTS 2). Details in AI_DISCLOSURE.md.

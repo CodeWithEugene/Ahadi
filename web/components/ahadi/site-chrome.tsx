@@ -82,7 +82,7 @@ export function SiteFooter() {
         </div>
         <FooterCol title="Product" links={[["Public ledger", "/funds"], ["Verify a receipt", "/verify"], ["Organiser console", "/console"], ["What Ahadi knows", "/console/agent"]]} />
         <FooterCol title="Learn" links={[["How it works", "/how-it-works"], ["Developers", "/developers"], ["Trust and safety", "/trust"], ["About", "/about"]]} />
-        <FooterCol title="Built on" links={[["SingularityNET Omega", "https://github.com/singnet/Omega"], ["Stellar testnet", "https://developers.stellar.org"], ["NEAR Intents (dry quotes)", "https://docs.near-intents.org"], ["Source code", "https://github.com/CodeWithEugene/AI-OMEGA-AGENT-DEV-BUILDATHON"]]} />
+        <FooterCol title="Built on" links={[["SingularityNET Omega", "https://github.com/singnet/Omega"], ["Stellar testnet", "https://developers.stellar.org"], ["NEAR Intents (dry quotes)", "https://docs.near-intents.org"], ["Source code", "https://github.com/CodeWithEugene/Ahadi"]]} />
       </div>
     </footer>
   )

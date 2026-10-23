@@ -65,7 +65,7 @@ Full results, transaction hashes and limitations: [docs/evidence.md](docs/eviden
 Prerequisites: Docker Desktop, Python 3.12 with [uv](https://docs.astral.sh/uv/), Node 20+ with pnpm, and an LLM key (OpenRouter, Anthropic, ASI:One or ASI Cloud).
 
 ```bash
-git clone https://github.com/CodeWithEugene/AI-OMEGA-AGENT-DEV-BUILDATHON.git ahadi && cd ahadi
+git clone https://github.com/CodeWithEugene/Ahadi.git && cd Ahadi
 cp .env.example .env              # add OPENROUTER_API_KEY (or another provider's key)
 make setup                        # creates and funds Stellar testnet accounts; writes .keys/ (git-ignored)
 make scenario                     # optional: runs the full October story on testnet without the LLM

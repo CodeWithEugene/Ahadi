@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "What Ahadi guarantees, what is simulated, where every key lives, how the agent is isolated and how it resists prompt injection. Honest limits included.",
 }
 
-const REPO = "https://github.com/CodeWithEugene/AI-OMEGA-AGENT-DEV-BUILDATHON"
+const REPO = "https://github.com/CodeWithEugene/Ahadi"
 
 const NAV: NavGroup[] = [
   {

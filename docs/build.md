@@ -135,7 +135,7 @@ The build follows [demo-script.md](demo-script.md) §2. Each P0 item above maps 
 ## 4. Repository Layout
 
 ```
-AI-OMEGA-AGENT-DEV-BUILDATHON/
+Ahadi/
 ├── README.md                    track, entry type, problem, setup, deps, contributors, new work
 ├── AI_DISCLOSURE.md
 ├── LICENSE                      MIT (ours); third-party licences listed in README

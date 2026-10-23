@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "Ahadi means promise in Kiswahili. Built in Nairobi by Technetians for the BASIX.MARKET AI Omega Agent Dev Buildathon, Track 02: global payouts and prize transparency.",
 }
 
-const REPO = "https://github.com/CodeWithEugene/AI-OMEGA-AGENT-DEV-BUILDATHON"
+const REPO = "https://github.com/CodeWithEugene/Ahadi"
 
 const BUILD: { when: string; title: string; text: string; tone: string }[] = [
   {
