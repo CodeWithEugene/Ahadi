@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "basix-event": {
+      "type": "http",
+      "url": "https://www.basix.market/api/mcp/b4"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "servers": {
+      "basix-event": {
+        "type": "remote",
+        "url": "https://www.basix.market/api/mcp/b4"
+      }
+    }
+  }
+}
