@@ -340,7 +340,9 @@ class Engine:
             raise EngineError("the agent's signature is missing", "missing_signature", 409)
         # Persist the fully signed envelope before it leaves this machine: if the network drops,
         # we can always find out what happened by its hash and resend the identical envelope.
-        self.store.update_proposal(pid, status="submitted", xdr=signed_xdr)
+        if not self.store.claim(pid, "proposed", "submitted"):
+            raise EngineError("this proposal is already being submitted", "bad_state", 409)
+        self.store.update_proposal(pid, xdr=signed_xdr)
         hub.publish("signature", proposal_id=pid, signer="organiser", tx_hash=p["tx_hash"])
         return self.resolve_submitted(pid)
 
@@ -390,6 +392,10 @@ class Engine:
         p = self._proposal(pid)
         ev_id = p["event_id"]
         req = p["request"] or {}
+        # Exactly one settlement per proposal, even if two processes resolve it at the same time.
+        if not self.store.claim(pid, "submitted", "settling"):
+            p = self._proposal(pid)
+            return {"ok": p["status"] == "settled", "status": p["status"], "proposal": p, "already": True}
         if res.ok:
             p = self.store.update_proposal(pid, status="settled", result={"tx_hash": res.hash, "ledger": res.ledger, "fee": res.fee_charged})
             if p["kind"] == "rule":

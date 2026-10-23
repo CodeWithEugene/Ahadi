@@ -95,7 +95,7 @@ export const CAPTURED_REFUSAL = {
     {
       name: "place-unpaid",
       passed: false,
-      reason: "place 3 was already paid to Team Kaveri",
+      reason: "place 3 was already paid or held for Team Kaveri",
     },
   ] as Check[],
 }

@@ -4,10 +4,11 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 docker rm -f ahadi-omega >/dev/null 2>&1 || true
-scripts/reset_demo.sh propose | tail -1
-lsof -ti tcp:8000 -sTCP:LISTEN | xargs kill 2>/dev/null || true
+lsof -ti tcp:8000 -sTCP:LISTEN | xargs kill 2>/dev/null || true   # stop the bridge before touching its ledger
 sleep 1
-(cd bridge && nohup uv run uvicorn ahadi_bridge.main:app --host 0.0.0.0 --port 8000 > ../.data/bridge.log 2>&1 &)
+scripts/reset_demo.sh propose | tail -1
+sleep 1
+(cd bridge && nohup uv run uvicorn ahadi_bridge.main:app --host 127.0.0.1 --port 8000 --proxy-headers > ../.data/bridge.log 2>&1 &)
 sleep 4
 scripts/dev_omega.sh "${1:-OpenRouter}" "${2:-z-ai/glm-5.3}" >/dev/null
 for i in $(seq 1 40); do

@@ -1024,7 +1024,9 @@ export function ProofBand({ data }: { data: HomeData }) {
       label: "ledger matches the chain",
       detail:
         t && t.chain_balance_cents !== null
-          ? `Ledger ${usd(t.available_cents)}, chain ${usd(t.chain_balance_cents)} in the fund right now.`
+          ? t.available_cents === 0 && t.chain_balance_cents === 0 && t.received_cents > 0
+            ? `${usd(t.received_cents)} in, every cent paid, held or carried forward; the fund account on chain is empty, as the ledger says.`
+            : `Ledger ${usd(t.available_cents)}, chain ${usd(t.chain_balance_cents)} in the fund right now.`
           : "Compared with the fund's balance on Horizon on every read.",
     },
   ]

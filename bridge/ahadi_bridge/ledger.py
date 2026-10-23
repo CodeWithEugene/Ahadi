@@ -97,7 +97,9 @@ class _LockedConn:
     def execute(self, sql, args=()):
         with self.lock:
             cur = self.conn.execute(sql, args)
-            return _Rows(cur.fetchall())
+            rows = _Rows(cur.fetchall())
+            rows.rowcount = cur.rowcount
+            return rows
 
     def executescript(self, sql):
         with self.lock:
@@ -187,6 +189,11 @@ class Store:
         with self.lock:
             self.db.execute(f"update proposals set {cols} where id=?", (*vals, pid))
         return self.proposal(pid)
+
+    def claim(self, pid: str, frm: str, to: str) -> bool:
+        """Atomically move a proposal between states. Only one caller (thread or process) can win."""
+        r = self.db.execute("update proposals set status=?, updated_at=? where id=? and status=?", (to, now(), pid, frm))
+        return r.rowcount == 1
 
     def live_proposal_for_request(self, request_id: str) -> dict | None:
         return self._row(self.db.execute(
